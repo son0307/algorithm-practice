@@ -30,35 +30,28 @@ public class Main {
             int end = Integer.parseInt(st.nextToken());
             lines.add(new Line(start, end));
         }
+        
         Collections.sort(lines);
 
-        ArrayList<Line> selectedLines = new ArrayList<>();
-        dfs(0, selectedLines);
+        dfs(0, 0, -1);
+        
         System.out.println(max);
     }
 
-    public static void dfs(int idx, ArrayList<Line> selected) {
+    public static void dfs(int idx, int count, int lastEnd) {
         if (idx == n) {
-            max = Math.max(max, selected.size());
-
+            max = Math.max(max, count);
             return;
         }
 
         Line current = lines.get(idx);
-        boolean isAvailable = true;
-        for (Line line : selected) {
-            if (line.end >= current.start) {
-                isAvailable = false;
-                break;
-            }
-        }
 
-        if (isAvailable) {
-            selected.add(current);
-            dfs(idx + 1, selected);
-            selected.remove(selected.size() - 1);
+        // 현재 선분과 마지막 선분이 겹치지 않는 경우
+        if (current.start > lastEnd) {
+            dfs(idx + 1, count + 1, current.end);
         }
-
-        dfs(idx + 1, selected);
+        
+        // 현재 선분을 선택하지 않는 경우
+        dfs(idx + 1, count, lastEnd);
     }
 }
