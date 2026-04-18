@@ -1,3 +1,5 @@
+package codetree.backTracking01.selectLine;
+
 import java.util.*;
 import java.io.*;
 
@@ -30,11 +32,11 @@ public class Main {
             int end = Integer.parseInt(st.nextToken());
             lines.add(new Line(start, end));
         }
-        
+
         Collections.sort(lines);
 
         dfs(0, 0, -1);
-        
+
         System.out.println(max);
     }
 
@@ -50,7 +52,7 @@ public class Main {
         if (current.start > lastEnd) {
             dfs(idx + 1, count + 1, current.end);
         }
-        
+
         // 현재 선분을 선택하지 않는 경우
         dfs(idx + 1, count, lastEnd);
     }
