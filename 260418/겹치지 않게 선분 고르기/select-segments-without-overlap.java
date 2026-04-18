@@ -57,8 +57,8 @@ public class Main {
             selected.add(current);
             dfs(idx + 1, selected);
             selected.remove(selected.size() - 1);
-        } else {
-            dfs(idx + 1, selected);
         }
+
+        dfs(idx + 1, selected);
     }
 }
