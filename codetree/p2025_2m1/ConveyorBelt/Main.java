@@ -1,0 +1,34 @@
+package codetree.p2025_2m1.ConveyorBelt;
+
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        int t = sc.nextInt();
+
+        int[] top = new int[n], bottom = new int[n];
+        for(int i = 0; i < n; i++) top[i] = sc.nextInt();
+        for(int i = 0; i < n; i++) bottom[i] = sc.nextInt();
+
+        for(int r = 0; r < t; r++) {
+            int temp = bottom[n - 1];
+            for (int i = n - 1; i >= 1; i--)
+                bottom[i] = bottom[i - 1];
+            bottom[0] = top[n - 1];
+            for (int i = n - 1; i >= 1; i--)
+                top[i] = top[i - 1];
+            top[0] = temp;
+        }
+
+        for(int i = 0; i < n; i++) {
+            System.out.print(top[i] + " ");
+        }
+        System.out.println();
+        for(int i = 0; i < n; i++) {
+            System.out.print(bottom[i] + " ");
+        }
+    }
+}
